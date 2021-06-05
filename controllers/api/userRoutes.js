@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const { User } = require("../../models");
 
+// router for /users/
+
 router.post("/", async (req, res) => {
   try {
     const newUser = await User.create(req.body);
@@ -24,12 +26,14 @@ router.post("/login", async (req, res) => {
 
     if (!currentUser) {
       res.status(400).json({ message: "Incorrect email or password" });
+      return;
     }
 
     const correctPassword = await currentUser.checkPassword(req.body.password);
 
     if (!correctPassword) {
       res.status(400).json({ message: "Incorrect email or password" });
+      return;
     }
 
     req.session.save(() => {
