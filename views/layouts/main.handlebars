@@ -29,13 +29,17 @@
             </li>
             {{else}}
             <li class="nav-item">
-              <a class="nav-link" href="">Login</a>
+              <a class="nav-link" href="/login">Login</a>
             </li>
             {{/if}}
           </ul>
         </div>
       </nav>
     </header>
-    <main>{{{ body }}}</main>
+    <main>
+      <div class="container-fluid">
+      {{{ body }}}
+      </div>
+      </main>
   </body>
 </html>
