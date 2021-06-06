@@ -2,23 +2,20 @@
           <h3>Homepage</h3>
         </div>
  <div class="row justify-content-center">
-    {{!-- <!-- // if projects.length  -->
-    <!-- {{#each posts as |post|}} --> --}}
+     {{#if posts.length}}
+   {{#each posts as |post|}}
     <div class="col-10">
-    {{!-- <!-- href = /post/post.id --> --}}
-    <a href="#">
-        <div class="card mb-3">
-        {{!-- <!-- post.title --> --}}
-        <h5 class="card-header">Project Title</h5>
-        <div class="card-body">
-            {{!-- <!-- post.description --> --}}
-            <p class="card-text">Post Description</p>
+        <div class="card text-white bg-dark mb-3">
+        <div class="card-header">
+        <h5 class= "mb-3">{{post.title}}</h5>
+        <h6 class=" text-right card-subtitle mb-2 text-muted">Posted by {{post.user.username}} on {{format_date post.date_created}}</h6>
+        </div> 
+        <div class="card-body ">
+            <p class="card-text">{{post.description}}</p>
+            <a href="/post/{{post.id}}" class=" stretched-link"></a>
         </div>
-        <!--END OF CARD BODY-->
         </div>
-        <!--END OF CARD-->
-    </a>
     </div>
-    <!--END OF COL-->
-    {{!-- <!-- {{/each}} --> --}}
+    {{/each}}
+    {{/if}}
 </div>
