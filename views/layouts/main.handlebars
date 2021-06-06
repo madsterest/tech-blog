@@ -11,7 +11,7 @@
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-3 mb-5">
+      <nav class=" text-monospace navbar navbar-expand-sm navbar-dark bg-dark p-3 mb-5">
         <div class="container-fluid">
           <span class="navbar-brand mb-0 h1">Hello Users</span>
         </div>
@@ -25,11 +25,17 @@
             </li>
             {{#if logged_in}}
             <li class="nav-item">
-              <a class="nav-link" href="#">Logout</a>
+              <button type="button" id ="logout-btn" class="btn btn-light">Logout</button>
             </li>
             {{else}}
             <li class="nav-item">
-              <a class="nav-link" href="/login">Login</a>
+                <a
+                href="/login"
+                class="btn btn-light"
+                role="button"
+                aria-pressed="true"
+                >Login</a
+              >
             </li>
             {{/if}}
           </ul>
@@ -37,9 +43,13 @@
       </nav>
     </header>
     <main>
-      <div class="container-fluid">
+      <div class="container-fluid text-monospace">
       {{{ body }}}
       </div>
       </main>
+
+      {{#if logged_in}}
+      <script src = "./js/logout.js"></script>
+      {{/if}}
   </body>
 </html>
