@@ -1,15 +1,24 @@
-
-<div class="row justify-content-center">
-    <div class="col-10">
-        <div class="card mb-3">
-            <h5 class="card-header">Project Title</h5>
-            <div class="card-body">
-            <p class="card-text">Post Description</p>
-            </div>
+        <div class="row justify-content-center mb-4">
+          <h3>Dashboard</h3>
         </div>
-    </div>
-</div>
-    <div class="row justify-content-center">
-        <button type="button" class="btn btn-outline-dark">Add Post</button>
-    </div>
-</div>
+        <div class="row justify-content-center">
+          {{#if posts.length}}
+          {{#each posts as |post|}}
+          <div class="col-10">
+              <div class="card mb-3">
+                <h5 class="card-header">{{post.title}}</h5>
+                <div class="card-body">
+                  <p class="card-text">{{post.description}}</p>
+                </div>
+                <!--END OF CARD BODY-->
+              </div>
+              <!--END OF CARD-->
+            </a>
+          </div>
+          <!--END OF COL-->
+          {{/each}}
+          {{/if}}
+        </div>
+        <div class="row justify-content-center">
+          <a href = "/post" class="btn btn-outline-dark">Add Post</a>
+        </div>

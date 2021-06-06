@@ -1,14 +1,24 @@
-<div class="row justify-content-center">
-    <div class="col-10">
-        <div class="card mb-3">
-            <h5 class="card-header">Project Title</h5>
-            <div class="card-body">
-            <p class="card-text">Post Description</p>
-            </div>
+ <div class="row justify-content-center mb-4">
+          <h3>Homepage</h3>
         </div>
+ <div class="row justify-content-center">
+    {{!-- <!-- // if projects.length  -->
+    <!-- {{#each posts as |post|}} --> --}}
+    <div class="col-10">
+    {{!-- <!-- href = /post/post.id --> --}}
+    <a href="#">
+        <div class="card mb-3">
+        {{!-- <!-- post.title --> --}}
+        <h5 class="card-header">Project Title</h5>
+        <div class="card-body">
+            {{!-- <!-- post.description --> --}}
+            <p class="card-text">Post Description</p>
+        </div>
+        <!--END OF CARD BODY-->
+        </div>
+        <!--END OF CARD-->
+    </a>
     </div>
-</div>
-    <div class="row justify-content-center">
-        <button type="button" class="btn btn-outline-dark">Add Post</button>
-    </div>
+    <!--END OF COL-->
+    {{!-- <!-- {{/each}} --> --}}
 </div>
