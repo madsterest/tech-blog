@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+          <div class="col-10">
+            <div class="card text-white bg-dark mb-3">
+              <div class="card-header">
+                <h5 class="mb-3" id="post-id" data-id = {{id}}>{{title}}</h5>
+                <h6 class="text-right card-subtitle mb-2 text-muted">
+                  Posted by {{user.username}} on {{format_date
+                  date_created}}
+                </h6>
+              </div>
+              <div class="card-body">
+                <p class="card-text">{{description}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          {{#if comments.length }}
+         {{#each comments as |comment|}}
+          <div class="col-10">
+            <div class="card border-secondary mb-1">
+              <div class="card-body">
+                <p class="card-text">{{comment.description}}</p>
+              </div>
+            </div>
+          </div> 
+       {{/each}} 
+        {{/if}}
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-10">
+            <form class="comment">
+              <div class="mb-3">
+                <textarea
+                  class="form-control"
+                  id="comment-description"
+                  placeholder="Comment"
+                  rows="3"
+                ></textarea>
+              </div>
+              <div class="text-right">
+                <button type="submit" class="btn btn-light">Create</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <script src="../../js/comment.js"></script>

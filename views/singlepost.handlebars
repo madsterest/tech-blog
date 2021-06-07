@@ -1,0 +1,32 @@
+<div class="row justify-content-center">
+          <div class="col-10">
+            <div class="card text-white bg-dark mb-3">
+              <div class="card-header">
+                <h5 class="mb-3">{{title}}</h5>
+                <h6 class="text-right card-subtitle mb-2 text-muted">
+                  Posted by {{user.username}} on {{format_date
+                  date_created}}
+                </h6>
+              </div>
+              <div class="card-body">
+                <p class="card-text">{{description}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          {{#if comments.length}}
+          {{#each comments as |comment|}}
+          <div class="col-10">
+            <div class="card border-secondary mb-1">
+              <div class="card-body">
+                <p class="card-text">{{comment.description}}</p>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+          {{/if}}
+        </div>
+        <div class="row justify-content-center">
+          <a href="/post/{{id}}/comment" class="btn btn-outline-dark">Add Comment</a>
+        </div>

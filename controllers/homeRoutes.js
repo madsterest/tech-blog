@@ -54,8 +54,55 @@ router.get("/dashboard", async (req, res) => {
 });
 
 router.get("/post/:id", async (req, res) => {
-  res.render();
-  // create individual Post View
+  try {
+    const onePost = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ["username"],
+        },
+        {
+          model: Comment,
+          attributes: ["description"],
+        },
+      ],
+    });
+
+    const posts = onePost.get({ plain: true });
+
+    res.render("singlepost", {
+      ...posts,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+router.get("/post/:id/comment", async (req, res) => {
+  try {
+    const onePost = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ["username"],
+        },
+        {
+          model: Comment,
+          attributes: ["description"],
+        },
+      ],
+    });
+
+    const posts = onePost.get({ plain: true });
+
+    res.render("postcomment", {
+      ...posts,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
 });
 
 module.exports = router;
