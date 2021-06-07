@@ -65,6 +65,12 @@ router.get("/post/:id", async (req, res) => {
         {
           model: Comment,
           attributes: ["description", "user_id", "date_created"],
+          include: [
+            {
+              model: User,
+              attributes: ["username"],
+            },
+          ],
         },
       ],
     });
@@ -91,6 +97,12 @@ router.get("/post/:id/comment", withAuth, async (req, res) => {
         {
           model: Comment,
           attributes: ["description", "user_id", "date_created"],
+          include: [
+            {
+              model: User,
+              attributes: ["username"],
+            },
+          ],
         },
       ],
     });
@@ -101,6 +113,34 @@ router.get("/post/:id/comment", withAuth, async (req, res) => {
       ...posts,
       logged_in: true,
     });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+router.get("/test/:id", async (req, res) => {
+  try {
+    const onePost = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ["username"],
+        },
+        {
+          model: Comment,
+          attributes: ["description", "user_id", "date_created"],
+          include: [
+            {
+              model: User,
+              attributes: ["username"],
+            },
+          ],
+        },
+      ],
+    });
+
+    const posts = onePost.get({ plain: true });
+    res.status(200).json(posts);
   } catch (err) {
     res.status(400).json(err);
   }
