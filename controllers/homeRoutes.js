@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { Post, User, Comment } = require("../models");
+const withAuth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
   try {
@@ -35,7 +36,7 @@ router.get("/post", async (req, res) => {
   res.render("newpost", { logged_in: req.session.logged_in });
 });
 
-router.get("/dashboard", async (req, res) => {
+router.get("/dashboard", withAuth, async (req, res) => {
   try {
     const userPosts = await Post.findAll({
       where: { user_id: req.session.user_id },
@@ -46,7 +47,7 @@ router.get("/dashboard", async (req, res) => {
 
     res.render("dashboard", {
       posts,
-      logged_in: req.session.logged_in,
+      logged_in: true,
     });
   } catch (err) {
     res.status(400).json(err);
@@ -63,7 +64,7 @@ router.get("/post/:id", async (req, res) => {
         },
         {
           model: Comment,
-          attributes: ["description"],
+          attributes: ["description", "user_id", "date_created"],
         },
       ],
     });
@@ -79,7 +80,7 @@ router.get("/post/:id", async (req, res) => {
   }
 });
 
-router.get("/post/:id/comment", async (req, res) => {
+router.get("/post/:id/comment", withAuth, async (req, res) => {
   try {
     const onePost = await Post.findByPk(req.params.id, {
       include: [
@@ -89,7 +90,7 @@ router.get("/post/:id/comment", async (req, res) => {
         },
         {
           model: Comment,
-          attributes: ["description"],
+          attributes: ["description", "user_id", "date_created"],
         },
       ],
     });
@@ -98,7 +99,7 @@ router.get("/post/:id/comment", async (req, res) => {
 
     res.render("postcomment", {
       ...posts,
-      logged_in: req.session.logged_in,
+      logged_in: true,
     });
   } catch (err) {
     res.status(400).json(err);
