@@ -18,7 +18,8 @@
 
 
  # Installation
- This site is deployed at 
+ This site is deployed at https://tech-forum-blog.herokuapp.com/
+ 
 
 
  # Useage
