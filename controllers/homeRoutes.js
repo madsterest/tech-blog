@@ -54,6 +54,38 @@ router.get("/dashboard", withAuth, async (req, res) => {
   }
 });
 
+router.get("/dashboard/:id", async (req, res) => {
+  try {
+    const onePost = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ["username"],
+        },
+        {
+          model: Comment,
+          attributes: ["description", "user_id", "date_created"],
+          include: [
+            {
+              model: User,
+              attributes: ["username"],
+            },
+          ],
+        },
+      ],
+    });
+
+    const posts = onePost.get({ plain: true });
+
+    res.render("dashboardpost", {
+      ...posts,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 router.get("/post/:id", async (req, res) => {
   try {
     const onePost = await Post.findByPk(req.params.id, {
@@ -83,6 +115,21 @@ router.get("/post/:id", async (req, res) => {
     });
   } catch (err) {
     res.status(400).json(err);
+  }
+});
+
+router.get("/post/edit/:id", async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id);
+
+    const posts = postData.get({ plain: true });
+
+    res.render("editpost", {
+      ...posts,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(00).json(err);
   }
 });
 

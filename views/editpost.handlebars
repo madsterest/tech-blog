@@ -1,0 +1,30 @@
+<div class="row justify-content-center">
+          <div class="col-10">
+            <form class="edit-post" data-id={{id}}>
+              <div class="mb-3">
+                <h3>Edit Post</h3>
+              </div>
+              <div class="mb-3">
+                <label for="post-title" class="form-label">Title</label>
+                <textarea
+                  class="form-control"
+                  id="post-title"
+                  rows="3"
+                >{{title}}</textarea>
+              </div>
+              <div class="mb-3">
+                <label for="post-description" class="form-label"
+                  >Description</label
+                >
+                <textarea
+                  class="form-control"
+                  id="post-description"
+                  rows="3"
+                >{{description}}</textarea>
+              </div>
+              <button type="submit" class="btn btn-primary mt-3">Create</button>
+            </form>
+          </div>
+        </div>
+      </div>
+<script src="../../js/submitEdit.js"></script>
